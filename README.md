@@ -1,24 +1,4 @@
 # ncovnow
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+코로나 바이러스에 관한 정보를 알려주는 사이트.
+링크 : (완성후 작성예정)
