@@ -7,9 +7,11 @@
       </v-toolbar>
       <v-card-text>
         <div>
-          아래의 정보는 각국 정부의 데이터이므로 정확한 수치가 아닐 수 있습니다.
-          <a href="http://www.xn--now-po7lf48dlsm0ya109f.kr/" target="_blank"
-            >정보 출처 바로가기</a
+          아래의 정보는 각국 정부의 데이터이므로 정확한 수치가 아닐 수
+          있습니다.<a
+            href="http://www.xn--now-po7lf48dlsm0ya109f.kr/"
+            target="_blank"
+            >정보 제공 바로가기</a
           >
         </div>
         <div>마지막 업데이트 시간 : {{ lastUpdate }}</div>
@@ -19,19 +21,21 @@
       <v-toolbar dense flat color="primary" dark>
         <v-toolbar-title>현재상황</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn text>해외</v-btn>
-        /
-        <v-btn text>한국</v-btn>
+        <v-btn text v-on:click="showLocal = !showLocal"
+          >{{ showLocal ? "국내" : "해외" }} 수치 보기</v-btn
+        >
       </v-toolbar>
       <v-card-text>
         <v-row>
           <v-col cols="12" sm="6">
             <div class="headline">감염자</div>
-            <div class="display-2">{{ global.confirm }}</div>
+            <div class="display-2">
+              {{ showLocal ? local.confirm : global.confirm}}
+            </div>
           </v-col>
           <v-col cols="12" sm="6">
             <div class="headline">사망자</div>
-            <div class="display-2">{{ global.death }}</div>
+            <div class="display-2">{{ showLocal ?  local.death : global.death}}</div>
           </v-col>
         </v-row>
         <v-data-table
@@ -49,7 +53,12 @@
 import { db } from "./../plugins/firebase"
 export default {
   data: () => ({
+    showLocal: false,
     global: {
+      confirm: null,
+      death: null
+    },
+    local: {
       confirm: null,
       death: null
     },
@@ -75,9 +84,13 @@ export default {
         .doc("now")
         .get()
       const data = snapshot.data()
+
       this.global.confirm = data.global.confirm
       this.global.death = data.global.death
+      this.local.confirm = data.local.confirm
+      this.local.death = data.local.death
       this.lastUpdate = data.lastUpdate
+
       const worldData = data.data
       worldData.forEach(d => {
         let name = d.name
