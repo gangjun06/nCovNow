@@ -6,8 +6,13 @@
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-card-text>
-        <div>아래의 정보는 각국 정부의 데이터이므로 정확한 수치가 아닐 수 있습니다.</div>
-        <div>마지막 업데이트 시간 : {{lastUpdate}}</div>
+        <div>
+          아래의 정보는 각국 정부의 데이터이므로 정확한 수치가 아닐 수 있습니다.
+          <a href="http://www.xn--now-po7lf48dlsm0ya109f.kr/" target="_blank"
+            >정보 출처 바로가기</a
+          >
+        </div>
+        <div>마지막 업데이트 시간 : {{ lastUpdate }}</div>
       </v-card-text>
     </v-card>
     <v-card class="mx-auto" max-width="856">
@@ -56,8 +61,7 @@ export default {
         value: "name"
       },
       { text: "확인됨", value: "confirm" },
-      { text: "사망자", value: "death" },
-      { text: "회복됨", value: "recover" }
+      { text: "사망자", value: "death" }
     ],
     items: []
   }),
@@ -74,7 +78,18 @@ export default {
       this.global.confirm = data.global.confirm
       this.global.death = data.global.death
       this.lastUpdate = data.lastUpdate
+      const worldData = data.data
+      worldData.forEach(d => {
+        let name = d.name
+        let confirm = d.confirm ? parseInt(d.confirm) : 0
+        let death = d.death ? parseInt(d.death) : 0
 
+        this.items.push({
+          name: name,
+          confirm: confirm,
+          death: death
+        })
+      })
     }
   }
 }
