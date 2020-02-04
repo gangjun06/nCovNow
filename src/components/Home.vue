@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card class="mx-auto my-4" max-width="856">
+    <v-card class="mx-auto text-center my-4" max-width="856">
       <v-toolbar dense flat color="primary" dark>
         <v-toolbar-title>공지사항</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
         <v-toolbar-title>현재상황</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn text v-on:click="showLocal = !showLocal"
-          >{{ showLocal ? "국내" : "해외" }} 수치 보기</v-btn
+          >{{ showLocal ? "해외" : "국내" }} 수치 보기</v-btn
         >
       </v-toolbar>
       <v-card-text>
@@ -30,12 +30,14 @@
           <v-col cols="12" sm="6">
             <div class="headline">감염자</div>
             <div class="display-2">
-              {{ showLocal ? local.confirm : global.confirm}}
+              {{ showLocal ? local.confirm : global.confirm }}
             </div>
           </v-col>
           <v-col cols="12" sm="6">
             <div class="headline">사망자</div>
-            <div class="display-2">{{ showLocal ?  local.death : global.death}}</div>
+            <div class="display-2">
+              {{ showLocal ? local.death : global.death }}
+            </div>
           </v-col>
         </v-row>
         <v-data-table
@@ -44,6 +46,14 @@
           :items-per-page="5"
           class="elevation-1"
         ></v-data-table>
+        <v-card class="mx-auto my-4" max-width="856">
+          <v-toolbar dense flat>
+           <v-toolbar-title class="header">지난 7일간의 통계</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <chart></chart>
+          </v-card-text>
+        </v-card>
       </v-card-text>
     </v-card>
   </v-container>
@@ -51,7 +61,19 @@
 
 <script>
 import { db } from "./../plugins/firebase"
+import chart from  "./Chart"
+const gradients = [
+  ["#222"],
+  ["#42b3f4"],
+  ["red", "orange", "yellow"],
+  ["purple", "violet"],
+  ["#00c6ff", "#F0F", "#FF0"],
+  ["#f72047", "#ffd200", "#1feaea"]
+]
 export default {
+  components:{
+    chart
+  },
   data: () => ({
     showLocal: false,
     global: {
@@ -72,7 +94,20 @@ export default {
       { text: "확인됨", value: "confirm" },
       { text: "사망자", value: "death" }
     ],
-    items: []
+    items: [],
+    sparkLine: {
+      width: 2,
+      radius: 10,
+      padding: 8,
+      lineCap: "round",
+      gradient: gradients[5],
+      value: [0, 100, 150, 300, 500],
+      gradientDirection: "top",
+      gradients,
+      fill: false,
+      type: "trend",
+      autoLineWidth: false
+    }
   }),
   mounted() {
     this.getData()
