@@ -39,7 +39,6 @@ export default {
       })
       const date = this.data.date.reverse()
       const confirm = this.data.confirm.reverse()
-      console.log(date)
       this.datacollection = {
         labels: date,
         datasets: [
