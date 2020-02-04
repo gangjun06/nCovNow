@@ -1,7 +1,7 @@
 # ncovnow
 
 Show data about corona <br/>
-Link : (...)
+Link : https://ncov-now.web.app/
 
 ## setup
 yarn global add firebase-tools
