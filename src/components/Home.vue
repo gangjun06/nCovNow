@@ -30,13 +30,35 @@
           <v-col cols="12" sm="6">
             <div class="headline">감염자</div>
             <div class="display-2">
-              {{ showLocal ? local.confirm : global.confirm }}
+              <ICountUp
+                v-if="!showLocal"
+                :delay="ICup.delay"
+                :endVal="global.confirm"
+                :options="ICup.options"
+              />
+              <ICountUp
+                v-if="showLocal"
+                :delay="ICup.delay"
+                :endVal="local.confirm"
+                :options="ICup.options"
+              />
             </div>
           </v-col>
           <v-col cols="12" sm="6">
             <div class="headline">사망자</div>
             <div class="display-2">
-              {{ showLocal ? local.death : global.death }}
+              <ICountUp
+                v-if="!showLocal"
+                :delay="ICup.delay"
+                :endVal="global.death"
+                :options="ICup.options"
+              />
+              <ICountUp
+                v-if="showLocal"
+                :delay="ICup.delay"
+                :endVal="local.death"
+                :options="ICup.options"
+              />
             </div>
           </v-col>
         </v-row>
@@ -61,6 +83,7 @@
 
 <script>
 import { db } from "./../plugins/firebase"
+import ICountUp from "vue-countup-v2"
 import chart from "./Chart"
 const gradients = [
   ["#222"],
@@ -72,7 +95,8 @@ const gradients = [
 ]
 export default {
   components: {
-    chart
+    chart,
+    ICountUp
   },
   data: () => ({
     showLocal: false,
@@ -107,6 +131,18 @@ export default {
       fill: false,
       type: "trend",
       autoLineWidth: false
+    },
+    ICup: {
+      delay: 1000,
+      endVal: 120500,
+      options: {
+        useEasing: true,
+        useGrouping: true,
+        separator: ",",
+        decimal: ".",
+        prefix: "",
+        suffix: ""
+      }
     }
   }),
   mounted() {
@@ -123,8 +159,18 @@ export default {
       let counterdeath = 0
       this.local.confirm = data.local.confirm
       this.local.death = data.local.death
-      const date =  new Date(data.lastUpdate.seconds *1000);
-      const format = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분"
+      const date = new Date(data.lastUpdate.seconds * 1000)
+      const format =
+        date.getFullYear() +
+        "년 " +
+        (date.getMonth() + 1) +
+        "월 " +
+        date.getDate() +
+        "일 " +
+        date.getHours() +
+        "시 t" +
+        date.getMinutes() +
+        "분"
       this.lastUpdate = format
       const worldData = data.data
       worldData.forEach(d => {
@@ -142,6 +188,7 @@ export default {
         this.global.death = counterdeath
       })
     }
+    // eslint-disable-next-line no-unused-vars
   }
 }
 </script>
