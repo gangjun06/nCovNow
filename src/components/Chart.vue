@@ -1,6 +1,6 @@
 <template>
   <div class="small">
-    <line-chart :chart-data="datacollection"></line-chart>
+    <line-chart height="300" :chart-data="datacollection"></line-chart>
   </div>
 </template>
 
