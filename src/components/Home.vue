@@ -46,14 +46,14 @@
           :items-per-page="5"
           class="elevation-1"
         ></v-data-table>
-        <v-card class="mx-auto my-4" max-width="856">
-          <v-toolbar dense flat>
-           <v-toolbar-title class="header">지난 7일간의 통계</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <chart></chart>
-          </v-card-text>
-        </v-card>
+      </v-card-text>
+    </v-card>
+    <v-card class="mx-auto my-4" max-width="856">
+      <v-toolbar dense flat dark color="primary">
+        <v-toolbar-title class="header">통계 차트</v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <chart></chart>
       </v-card-text>
     </v-card>
   </v-container>
@@ -61,7 +61,7 @@
 
 <script>
 import { db } from "./../plugins/firebase"
-import chart from  "./Chart"
+import chart from "./Chart"
 const gradients = [
   ["#222"],
   ["#42b3f4"],
@@ -71,7 +71,7 @@ const gradients = [
   ["#f72047", "#ffd200", "#1feaea"]
 ]
 export default {
-  components:{
+  components: {
     chart
   },
   data: () => ({
