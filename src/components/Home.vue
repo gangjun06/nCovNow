@@ -177,9 +177,6 @@ export default {
       let counterConfirm = 0
       let counterDeath = 0
       let counterRecovered = 0
-      this.local.confirm = data.local.confirm
-      this.local.death = data.local.death
-      this.local.recovered = data.local.recovered
       const date = new Date(data.lastUpdate.seconds * 1000)
       const format =
         date.getFullYear() +
@@ -202,6 +199,11 @@ export default {
         counterConfirm += confirm
         counterDeath += death
         counterRecovered += recovered
+        if(name==="대한민국"){
+          this.local.confirm = confirm
+          this.local.death = death
+          this.local.recovered = recovered
+        }
         this.items.push({
           name: name,
           confirm: confirm,
