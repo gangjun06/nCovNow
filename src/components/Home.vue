@@ -17,7 +17,7 @@
         <div>마지막 업데이트 시간 : {{ lastUpdate }}</div>
       </v-card-text>
     </v-card>
-    <v-card class="mx-auto" max-width="856">
+    <v-card class="mx-auto" max-width= "856">
       <v-toolbar dense flat color="primary" dark>
         <v-toolbar-title>현재상황</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -70,7 +70,7 @@
         ></v-data-table>
       </v-card-text>
     </v-card>
-    <v-card class="mx-auto my-4" max-width="856">
+    <v-card class="mx-auto my-4" max-width="856" id="Chart">
       <v-toolbar dense flat dark color="primary">
         <v-toolbar-title class="header">통계 차트</v-toolbar-title>
       </v-toolbar>
