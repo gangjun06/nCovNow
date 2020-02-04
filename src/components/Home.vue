@@ -119,24 +119,27 @@ export default {
         .doc("now")
         .get()
       const data = snapshot.data()
-
-      this.global.confirm = data.global.confirm
-      this.global.death = data.global.death
+      let counterConfirm = 0
+      let counterdeath = 0
       this.local.confirm = data.local.confirm
       this.local.death = data.local.death
-      this.lastUpdate = data.lastUpdate
-
+      const date =  new Date(data.lastUpdate.seconds *1000);
+      const format = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 "+date.getHours()+"시 "+date.getMinutes()+"분"
+      this.lastUpdate = format
       const worldData = data.data
       worldData.forEach(d => {
         let name = d.name
         let confirm = d.confirm ? parseInt(d.confirm) : 0
         let death = d.death ? parseInt(d.death) : 0
-
+        counterConfirm += confirm
+        counterdeath += death
         this.items.push({
           name: name,
           confirm: confirm,
           death: death
         })
+        this.global.confirm = counterConfirm
+        this.global.death = counterdeath
       })
     }
   }

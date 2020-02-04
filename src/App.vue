@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
-        <v-toolbar-title>코로나 바이러스 현황</v-toolbar-title>
+        <v-toolbar-title>신종 코로나 바이러스 현황</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
