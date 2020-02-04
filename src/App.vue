@@ -23,6 +23,7 @@
 
     <v-content>
       <Home />
+      <QnA />
       <Footer />
     </v-content>
   </v-app>
@@ -31,13 +32,15 @@
 <script>
 import Home from "./components/Home"
 import Footer from "./components/Footer"
+import QnA from "./components/QnA"
 
 export default {
   name: "App",
 
   components: {
     Home,
-    Footer
+    Footer,
+    QnA
   },
 
   data: () => ({

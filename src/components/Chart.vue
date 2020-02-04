@@ -29,12 +29,18 @@ export default {
       const snapshot = await db
         .collection("data")
         .orderBy("Time", "desc")
+        .limit(7)
         .get()
       snapshot.forEach(d => {
         const data = d.data()
-        const date = new Date(data.Time.seconds *1000)
-        const format = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
-        this.data.confirm.push(data.global.confirm);
+        const date = new Date(data.Time.seconds * 1000)
+        const format =
+          date.getFullYear() +
+          "-" +
+          (date.getMonth() + 1) +
+          "-" +
+          date.getDate()
+        this.data.confirm.push(data.global.confirm)
         this.data.date.push(format)
       })
       const date = this.data.date.reverse()
@@ -45,11 +51,11 @@ export default {
           {
             label: "confirm",
             backgroundColor: "#f87979",
-            data: confirm 
+            data: confirm
           }
         ]
       }
-    },
+    }
   }
 }
 </script>

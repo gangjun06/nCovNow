@@ -188,7 +188,6 @@ export default {
         this.global.death = counterdeath
       })
     }
-    // eslint-disable-next-line no-unused-vars
   }
 }
 </script>
