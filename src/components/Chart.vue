@@ -48,9 +48,9 @@ export default {
         const date = new Date(data.Time.seconds * 1000)
         const format =
           date.getFullYear() +
-          "-" +
+          "/" +
           (date.getMonth() + 1) +
-          "-" +
+          "/" +
           date.getDate()
         this.data.confirm.push(data.global.confirm)
         this.data.date.push(format)

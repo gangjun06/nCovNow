@@ -186,7 +186,7 @@ export default {
         date.getDate() +
         "일 " +
         date.getHours() +
-        "시 t" +
+        "시 " +
         date.getMinutes() +
         "분"
       this.lastUpdate = format
