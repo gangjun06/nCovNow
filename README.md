@@ -4,11 +4,12 @@ Show data about corona <br/>
 Link : https://ncov-now.web.app/
 
 ## setup
+```bash
 yarn global add firebase-tools
 firebase login
 firebase init
 yarn add firebase
-
+```
 add File
 **./firebaseConfig.js**
 ```javascript
