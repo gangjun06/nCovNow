@@ -12,7 +12,7 @@
       <v-btn href="#Chart" text class="d-none d-sm-flex">
         <span class="mr-2">Chart</span>
       </v-btn>
-      <v-btn href="#" text class="d-none d-sm-flex">
+      <v-btn href="#Qna" text class="d-none d-sm-flex">
         <span class="mr-2">qna</span>
       </v-btn>
       <v-btn href="https://github.com/gangjun06/nCovNow" target="_blank" text>

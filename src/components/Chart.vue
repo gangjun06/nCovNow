@@ -1,13 +1,16 @@
 <template>
   <div class="small">
     <line-chart height="280" :chart-data="datacollection"></line-chart>
+    <v-row justify="space-around">
+      <v-switch v-model="status.showLocal" class="ma-2" label="국내 보기"></v-switch>
+      <v-switch v-model="status.showDeath" class="ma-2" label="사망자수 보기"></v-switch>
+    </v-row>
   </div>
 </template>
 
 <script>
 import LineChart from "./LineChart.js"
 import { db } from "./../plugins/firebase"
-
 export default {
   components: {
     LineChart
@@ -18,7 +21,11 @@ export default {
       data: {
         date: [],
         confirm: []
-      }
+      },
+      status:{
+        showLocal: false,
+        showDeath: false
+      } 
     }
   },
   mounted() {

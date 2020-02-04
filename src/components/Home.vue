@@ -17,7 +17,7 @@
         <div>마지막 업데이트 시간 : {{ lastUpdate }}</div>
       </v-card-text>
     </v-card>
-    <v-card class="mx-auto" max-width= "856">
+    <v-card class="mx-auto" max-width="856">
       <v-toolbar dense flat color="primary" dark>
         <v-toolbar-title>현재상황</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -27,8 +27,8 @@
       </v-toolbar>
       <v-card-text>
         <v-row>
-          <v-col cols="12" sm="6">
-            <div class="headline">감염자</div>
+          <v-col cols="12" sm="4">
+            <div class="headline">확인됨</div>
             <div class="display-2">
               <ICountUp
                 v-if="!showLocal"
@@ -44,7 +44,7 @@
               />
             </div>
           </v-col>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="4">
             <div class="headline">사망자</div>
             <div class="display-2">
               <ICountUp
@@ -57,6 +57,22 @@
                 v-if="showLocal"
                 :delay="ICup.delay"
                 :endVal="local.death"
+                :options="ICup.options"
+              />
+            </div> </v-col
+          ><v-col cols="12" sm="4">
+            <div class="headline">회복됨</div>
+            <div class="display-2">
+              <ICountUp
+                v-if="!showLocal"
+                :delay="ICup.delay"
+                :endVal="global.recovered"
+                :options="ICup.options"
+              />
+              <ICountUp
+                v-if="showLocal"
+                :delay="ICup.delay"
+                :endVal="local.recovered"
                 :options="ICup.options"
               />
             </div>
@@ -102,11 +118,13 @@ export default {
     showLocal: false,
     global: {
       confirm: null,
-      death: null
+      death: null,
+      recovered:null
     },
     local: {
       confirm: null,
-      death: null
+      death: null,
+      recovered:null
     },
     lastUpdate: null,
     headers: [
@@ -116,7 +134,8 @@ export default {
         value: "name"
       },
       { text: "확인됨", value: "confirm" },
-      { text: "사망자", value: "death" }
+      { text: "사망자", value: "death" },
+      { text: "회복됨", value: "recovered" },
     ],
     items: [],
     sparkLine: {
@@ -156,9 +175,11 @@ export default {
         .get()
       const data = snapshot.data()
       let counterConfirm = 0
-      let counterdeath = 0
+      let counterDeath = 0
+      let counterRecovered = 0
       this.local.confirm = data.local.confirm
       this.local.death = data.local.death
+      this.local.recovered = data.local.recovered
       const date = new Date(data.lastUpdate.seconds * 1000)
       const format =
         date.getFullYear() +
@@ -177,15 +198,19 @@ export default {
         let name = d.name
         let confirm = d.confirm ? parseInt(d.confirm) : 0
         let death = d.death ? parseInt(d.death) : 0
+        let recovered = d.recovered ? parseInt(d.recovered) :0
         counterConfirm += confirm
-        counterdeath += death
+        counterDeath += death
+        counterRecovered += recovered
         this.items.push({
           name: name,
           confirm: confirm,
-          death: death
+          death: death,
+          recovered : recovered 
         })
         this.global.confirm = counterConfirm
-        this.global.death = counterdeath
+        this.global.death = counterDeath
+        this.global.recovered = counterRecovered
       })
     }
   }

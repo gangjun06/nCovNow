@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-4 text-center" max-width="856">
+  <v-card class="mx-auto my-4" max-width="856" id="Qna">
     <v-toolbar flat dense dark color="primary">
       <v-toolbar-title>QnA</v-toolbar-title>
     </v-toolbar>
