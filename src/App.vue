@@ -24,6 +24,7 @@
     <v-content>
       <Home />
       <QnA />
+      <PreventSolution />
       <Footer />
     </v-content>
   </v-app>
@@ -33,6 +34,7 @@
 import Home from "./components/Home"
 import Footer from "./components/Footer"
 import QnA from "./components/QnA"
+import PreventSolution from "./components/PreventSolution"
 
 export default {
   name: "App",
@@ -40,7 +42,8 @@ export default {
   components: {
     Home,
     Footer,
-    QnA
+    QnA,
+    PreventSolution
   },
 
   data: () => ({
