@@ -5,7 +5,7 @@ Link : https://ncov-now.web.app/
 
 This is a project created when I first learned View <br />
 
-Why is this listed on the Github archive?
+~~Why is this listed on the Github archive?~~
 
 ## setup
 ```bash
